@@ -1,0 +1,164 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO/z4rgdynIxT+3sXcG+5lL",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/NoeEzequiel/Probabiidad/blob/main/Problemas%20de%20distribuci%C3%B3n%20Binomial%20y%20Poisson\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Problemas de distribución Binomial y Poisson\n",
+        "\n",
+        "Problema 1"
+      ],
+      "metadata": {
+        "id": "5Md8pPWaYY4t"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Para resolver este problema, primero debemos determinar qué tipo de distribución se aplica. Aquí tenemos un escenario en el que estamos interesados en contar el número de eventos (personas ingresadas en una unidad de cuidados intensivos) que ocurren en un intervalo de tiempo específico (un día). La media de estos eventos es de cinco personas por día. Este tipo de problema es típico de la distribución de Poisson."
+      ],
+      "metadata": {
+        "id": "f8eHM_ioYUfK"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import math\n",
+        "#Problema 1\n",
+        "#a) ¿Cuál es la probabilidad de que el número de personas ingresadas a una unidad de cuidados intensivos en un hospital particular, en un día, sea dos?\n",
+        "# Parámetro lambda\n",
+        "lmbda = 5\n",
+        "\n",
+        "# Número de eventos\n",
+        "k = 2\n",
+        "\n",
+        "# Cálculo de la probabilidad\n",
+        "probabilidad = (lmbda**k * math.exp(-lmbda)) / math.factorial(k)\n",
+        "print(f\"La probabilidad de que el número de personas ingresadas en un día sea 2 es: {probabilidad:.4f}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "mlbdkOQ7YVq0",
+        "outputId": "abf641f8-9952-4e3b-b7a5-fe4a0082bc5a"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "La probabilidad de que el número de personas ingresadas en un día sea 2 es: 0.0842\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#b) ¿Es probable que x exceda de 10?\n",
+        "from scipy.stats import poisson\n",
+        "\n",
+        "# Parámetro lambda\n",
+        "lmbda = 5\n",
+        "\n",
+        "# Cálculo de P(X <= 10)\n",
+        "probabilidad_acumulada = poisson.cdf(10, lmbda)\n",
+        "\n",
+        "# Cálculo de P(X > 10)\n",
+        "probabilidad_exceder_10 = 1 - probabilidad_acumulada\n",
+        "print(f\"La probabilidad de que el número de personas ingresadas en un día exceda de 10 es: {probabilidad_exceder_10:.4f}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "dfcXNCuxY0OB",
+        "outputId": "20164238-a3ce-4693-f074-e78c64463f31"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "La probabilidad de que el número de personas ingresadas en un día exceda de 10 es: 0.0137\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Problema 2\n",
+        "#• Un fabricante de podadoras para el pasto compra motores de 1 hp y 2 ciclos, en lotes de 1,000, a un proveedor.\n",
+        "#• El fabricate equipa cada una de las podadoras producidas por su planta con uno de los motores.\n",
+        "#• La historia muestra que la probabilidad de que cualquier motor del proveedor resulte no satisfactorio es .001.\n",
+        "\n",
+        "import math\n",
+        "\n",
+        "# Parámetro lambda\n",
+        "lmbda = 1\n",
+        "\n",
+        "# Probabilidad de que ninguno sea defectuoso\n",
+        "probabilidad_ninguno_defectuoso = (lmbda**0 * math.exp(-lmbda)) / math.factorial(0)\n",
+        "print(f\"La probabilidad de que ninguno sea defectuoso es: {probabilidad_ninguno_defectuoso:.4f}\")\n",
+        "\n",
+        "# Probabilidad de que tres sean defectuosos\n",
+        "probabilidad_tres_defectuosos = (lmbda**3 * math.exp(-lmbda)) / math.factorial(3)\n",
+        "print(f\"La probabilidad de que tres sean defectuosos es: {probabilidad_tres_defectuosos:.4f}\")\n",
+        "\n",
+        "# Probabilidad de que cuatro sean defectuosos\n",
+        "probabilidad_cuatro_defectuosos = (lmbda**4 * math.exp(-lmbda)) / math.factorial(4)\n",
+        "print(f\"La probabilidad de que cuatro sean defectuosos es: {probabilidad_cuatro_defectuosos:.4f}\")\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "014Gx-yfZO45",
+        "outputId": "13d97e67-89b4-4206-ca8f-5eb44faddf2c"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "La probabilidad de que ninguno sea defectuoso es: 0.3679\n",
+            "La probabilidad de que tres sean defectuosos es: 0.0613\n",
+            "La probabilidad de que cuatro sean defectuosos es: 0.0153\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
